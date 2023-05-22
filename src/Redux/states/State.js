@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState={
    movies:[],
    FilmTittle:'',
+   bgFilm:{}
 }
 const FilmSlice=createSlice({
    name:'FilmSlice',
@@ -10,11 +11,14 @@ const FilmSlice=createSlice({
    TopMovies:(state,action)=>{
      state.movies=[...action.payload]
         },
-   FilmTitle:((state,action)=>{
+   searchByFilmTitle:((state,action)=>{
    state.FilmTittle=action.payload
+   }),
+   backGroundImage:((state,action)=>{
+  state.bgFilm=action.payload
    })
    }
  
 })
-export const  {TopMovies,FilmTitle}=FilmSlice.actions
+export const  {TopMovies,searchByFilmTitle,backGroundImage}=FilmSlice.actions
 export default FilmSlice.reducer
