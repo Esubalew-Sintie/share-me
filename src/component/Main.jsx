@@ -1,13 +1,14 @@
-import React, { useEffect,useState} from 'react'
+import React, { useEffect} from 'react'
 import { TopMovies ,backGroundImage} from '../Redux/states/State'
 import { useDispatch,useSelector } from 'react-redux'
 import axios from 'axios'
 import PosterCard from './PosterCard'
  
-const Main = () => {
-const filmTitle=useSelector((state)=>state.Film.FilmTittle)
-const movies=useSelector((state)=>state.Film.movies)
+const Main =  () => {
+const filmTitle=  useSelector((state)=>state.Film.FilmTittle)
 const dispatch=useDispatch()
+
+const movies=   useSelector((state)=>state.Film.movies)
 const movie=movies[Math.floor(Math.random()*20)]
 dispatch(backGroundImage(movie))
 
@@ -29,6 +30,7 @@ axios.get(`${key}/movie`,{
 .catch((err)=>{
     console.log(err)})
 },[filmTitle])
+
 //inside the path component i use ? thing why because during access object of movie may be the will be nested object so we use it in order to remove error
   return (
     <div className='overflow-hidden'>
