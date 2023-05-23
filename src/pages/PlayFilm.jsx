@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 const PlayFilm = () => {
   const [selectedMovie,setSelectedMovie]=useState()
+  const [err,setError]=useState(false)
 const {id}=useParams()
 console.log(selectedMovie)
 console.log(id)
@@ -21,12 +22,13 @@ const renderTrailer=  ()=>{
     containerClassName='youtube'
     opts={{
       width:'100%',
-      height:'690px'
+      height:'680px'
     }}
     />}
   </div>)
 }
 useEffect(()=>{
+
    axios.get(`https://api.themoviedb.org/3/movie/${id}`,{
     params:{
       api_key:'f11d4bc738b22af4b21176c76744f40e',
@@ -35,19 +37,20 @@ useEffect(()=>{
    })
    .then((data)=>{
     setSelectedMovie(data.data)
- 
+    setError(false)
    })
    .catch((err)=>{
     console.log(err)
-    
+    setError(true)
    })
   
   
 },[])
 
   return (
-    <div className='w-full h-[100vh] '>
+    <div className='w-full h-[99vh]'>
     {selectedMovie?.videos?renderTrailer():<div className=' flex items-center justify-center  w-full h-[100vh] '><Lottie animationData={animation}/></div>}
+   
     </div>
   )
 }
