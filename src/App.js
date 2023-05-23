@@ -1,14 +1,18 @@
 import { Routes ,Route} from "react-router-dom";
 import NavBar from "./component/NavBar";
-import Home from "./pages/Home";
+
+import PlayFilm from "./pages/PlayFilm";
+import Main from "./component/Main";
  
  function App() {
   return (
     <>
      <NavBar/>
     <Routes>
-      <Route path="/" element={<Home/>}/>
+      <Route exact path="/" element={<Main/>}/>
+      <Route exact path='/play/:id' element={<PlayFilm/>}/>
     </Routes>
+    
     </>
   );
 }

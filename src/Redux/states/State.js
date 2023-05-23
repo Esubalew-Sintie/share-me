@@ -9,7 +9,7 @@ const FilmSlice=createSlice({
    initialState,
    reducers:{
    TopMovies:(state,action)=>{
-     state.movies=[...action.payload]
+     state.movies=action.payload
         },
    searchByFilmTitle:((state,action)=>{
    state.FilmTittle=action.payload
