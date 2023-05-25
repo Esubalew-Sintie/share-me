@@ -1,10 +1,16 @@
 import { initializeApp } from "firebase/app";
+import {getAuth,GoogleAuthProvider} from 'firebase/auth'
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyCWQ3JEe3WSFyKahIEPUMpiu8_xsKzHxF8",
-  authDomain: "netflix-clone-developmen-67aa1.firebaseapp.com",
-  projectId: "netflix-clone-developmen-67aa1",
-  storageBucket: "netflix-clone-developmen-67aa1.appspot.com",
-  messagingSenderId: "209122411560",
-  appId: "1:209122411560:web:487e59523905b2e07c211d"
+  apiKey:process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain:process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId:process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket:process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER,
+  appId:process.env.REACT_APP_APP_ID
 };
 const app = initializeApp(firebaseConfig);
+export const db=getFirestore(app)
+export const Provider=new GoogleAuthProvider()
+export const auth=getAuth(app)
+

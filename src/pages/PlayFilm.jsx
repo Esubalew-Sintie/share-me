@@ -6,10 +6,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 const PlayFilm = () => {
   const [selectedMovie,setSelectedMovie]=useState()
-  const [err,setError]=useState(false)
+  
 const {id}=useParams()
-console.log(selectedMovie)
-console.log(id)
 const renderTrailer=  ()=>{
   const trailer =  selectedMovie.videos
   .results[selectedMovie.videos
@@ -37,15 +35,15 @@ useEffect(()=>{
    })
    .then((data)=>{
     setSelectedMovie(data.data)
-    setError(false)
+    
    })
    .catch((err)=>{
     console.log(err)
-    setError(true)
+  
    })
   
   
-},[])
+},[id])
 
   return (
     <div className='w-full h-[99vh]'>

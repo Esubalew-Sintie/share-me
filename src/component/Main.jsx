@@ -46,7 +46,7 @@ movies()
 
 useEffect(()=>{
   AOS.init({duration:1000})
-})
+},[])
 
 const handleFilmTitle=(e)=>{
  e.preventDefault()
@@ -88,8 +88,8 @@ return string?.length>n?string.substr(0,n-1)+'...':string
       </div>
       <div className='absolute bottom-0 z-10 w-full h-[100px] bg-gradient-to-t from-black'> </div>
     </div>:<div className='flex items-center justify-center w-full h-[100vh]'><Lottie animationData={animation}/></div>}
-    <div className='w-full flex items-center justify-center'>
-      {movies&&<PosterCard movies={movies}/>}
+    <div className="flex flex-wrap items-center justify-center">
+      {movies&&movies.map((movie)=><PosterCard movie={movie} key={movie.id}/>)}
     </div>
     </div>
   )
