@@ -1,53 +1,58 @@
-import { Routes ,Route, BrowserRouter} from "react-router-dom";
-import NavBar from "./component/NavBar";
-import { auth } from "./pages/Firebase";
-import PlayFilm from "./pages/PlayFilm";
-import Main from "./component/Main";
+import {BrowserRouter as Router, Routes, Route,useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch,useSelector } from "react-redux"; 
-import { LogIn ,LogOut,PhotoUrl} from "./Redux/states/User";
-import UnProtected from "./pages/UnProtected";
-import Acount from "./pages/Acount";
+import {useEffect, useState} from "react";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import {Toaster} from "react-hot-toast";
+import {Provider} from "react-redux";
+import store from "./store/store";
 
 function App() {
-  const user=useSelector((state)=>state.user.user)
-  const dispatch=useDispatch()
-  useEffect(()=>{
-    const unsubscribe=onAuthStateChanged(auth,(userAuth)=>{
-     if(userAuth){
-      dispatch(LogIn({
-        uid:userAuth.uid,
-        email:userAuth.email
-      })) 
-      dispatch(PhotoUrl(userAuth?.photoURL
-        ))
-     }else{
-      dispatch(LogOut())
-     }
-    })
-    return unsubscribe
-  },[])
-  return (
-    <>
-  <BrowserRouter>
-  {!user?(
-    <Home/>
-  ):(<>
-    <NavBar/>
-    <Routes>
-      <Route exact path="/" element={ <Main/> }/>
-      <Route exact path='/play/:id' element={ <PlayFilm/> }/>
-      <Route path="/account" element={<Acount/>}/>
-      <Route path="/notExist" element={<UnProtected/>}/>
-    </Routes>
-    </>
-  )}
-  
-  </BrowserRouter>
-    </>
-  );
+	const navigate=useNavigate()
+	const [userLogin, setUserLogin] = useState({
+		name: "",
+		email: "",
+		password: "",
+	});
+	const [user, setUser] = useState(null);
+	useEffect(() => {
+		const user =
+			localStorage.getItem("user") || localStorage.removeItem("user");
+		// console.log(user);
+		setUser(user);
+		if (!user) {
+			navigate('/login')
+		}
+	}, []);
+        
+	return (
+		<div>
+			<Provider store={store}>
+				
+					<Toaster />
+
+					<Routes>
+						{!user && (
+							<Route
+								path="/login"
+								element={<Login user={userLogin} setUser={setUserLogin} />}
+							/>
+						)}{" "}
+						{!user && (
+							<Route
+								path="/signup"
+								element={<SignUp user={userLogin} setUser={setUserLogin} />}
+							/>
+						)}
+						
+						{
+							<Route path="/*" element={user ? <Home user={user} /> : <Login user={userLogin} setUser={setUserLogin}  />} />
+						}
+
+					</Routes>
+			</Provider>
+		</div>
+	);
 }
 
 export default App;

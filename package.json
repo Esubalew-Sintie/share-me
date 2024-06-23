@@ -1,5 +1,5 @@
 {
-  "name": "netfl",
+  "name": "share_me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,6 +18,16 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "react-youtube": "^10.1.0",
+    "@apollo/client": "^3.8.8",
+    "@hookform/resolvers": "^3.3.3",
+    "@tanstack/react-query": "^5.15.0",
+    "canvas-confetti": "^1.9.2",
+    "graphql": "^16.8.1",
+    "react-hook-form": "^7.49.2",
+    "react-hot-toast": "^2.4.1",
+    "react-loader-spinner": "^6.1.6",
+    "react-masonry-css": "^1.0.16",
+    "yup": "^1.3.3",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4"
   },
